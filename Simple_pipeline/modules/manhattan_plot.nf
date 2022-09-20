@@ -20,7 +20,7 @@ process MANHATTAN_PLOT {
     shell:
     '''
     module load any/R/4.1.2-X
-    Rscript /gpfs/space/home/ida/Nextflow_training/bin/Manhattan_plot.R \
+    Rscript !{baseDir}/bin/Manhattan_plot.R \
   --file !{regenie_out} \
   --phenotype_id !{phenotype_id} \
   --out !{phenotype_id} 

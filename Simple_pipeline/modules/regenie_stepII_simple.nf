@@ -2,6 +2,7 @@
 //nextflow.enable.dsl=2
 
 process REGENIE_STEP_2 {
+    container = 'quay.io/eqtlcatalogue/regenie:v3.2.1'
 
     // Process directives
     cpus 16
@@ -31,8 +32,6 @@ process REGENIE_STEP_2 {
     
     shell:         
     '''
-    module load broadwell/regenie/2.2.4
-   
     regenie \
     --step 2 \
     --pgen !{pgen_id} \
@@ -46,6 +45,5 @@ process REGENIE_STEP_2 {
     --pred !{pred_list} \
     --gz \
     --out pheno \
-
     '''
 }

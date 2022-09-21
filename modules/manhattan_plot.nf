@@ -2,7 +2,9 @@
 
 
 process MANHATTAN_PLOT {
-    cpus 16
+    container = "quay.io/eqtlcatalogue/regenie_manhattan:v22.09.1"
+
+    cpus 2
     memory '12 GB'
     time '10m'
         
@@ -19,11 +21,10 @@ process MANHATTAN_PLOT {
 
     shell:
     '''
-    module load any/R/4.1.2-X
     Rscript !{baseDir}/bin/Manhattan_plot.R \
-  --file !{regenie_out} \
-  --phenotype_id !{phenotype_id} \
-  --out !{phenotype_id} 
+     --file !{regenie_out} \
+     --phenotype_id !{phenotype_id} \
+     --out !{phenotype_id} 
     '''
 }
 

@@ -5,47 +5,55 @@ process REGENIE_STEP_1 {
     container = 'quay.io/eqtlcatalogue/regenie:v3.2.1'
     
     // Process directives
-    cpus 16
-    memory { 4.GB * params.phenotype_list.split(',').size() }
-    time '48h'
+    //cpus 16
+    //memory { 4.GB * params.phenotype_list.split(',').size() }
+    //time '48h'
     
-    publishDir "${params.outdir}/${params.prefix}/STEP1", mode:'copy',\
-		pattern: "${params.prefix}*"
+    /*publishDir "${params.outdir}/${params.prefix}/STEP1", mode:'copy',\
+		pattern: "${phenotype_id}*"
     publishDir "${params.outdir}/${params.prefix}/logs", mode:'copy',\
-		pattern:  ".command.out", saveAs: { filename -> "$params.prefix-step1.out" }
+		pattern:  ".command.out", saveAs: { filename -> "$phenotype_id-step1.out" }
     publishDir "${params.outdir}/${params.prefix}/STEP1", mode:'copy',\
-		pattern:  ".command.sh", saveAs: { filename -> "$params.prefix-step1.sh" }
+		pattern:  ".command.sh", saveAs: { filename -> "$phenotype_id-step1.sh" }*/
 
-    // Input data
+
+   // from current
+
     input:
-    tuple val(pgen_id), path(pgen_file)
+    file bgen_file
+    file sample_file
     file phenotype_file
+    val phenotype_id  // list of phenotypes?
     file covariate_file
 
     // Output data
     output:
-    path "${params.prefix}_pred.list"
-    file "${params.prefix}*.loco.gz"
+    val phenotype_id
+    path "*_pred.list"
+    file "*.loco.gz"
     path ".command.out"
     path ".command.sh"
+
 
     shell:
     '''
     regenie \
     --step 1 \
-    --pgen !{pgen_id} \
+    --bgen !{bgen_file} \
+    --sample !{sample_file} \
+    --ref-first \
     --phenoFile !{phenotype_file} \
-    --phenoColList !{params.phenotype_list} \
+    --phenoColList !{phenotype_id} \
     --covarFile !{covariate_file} \
     --covarColList !{params.covariate_list} \
     --use-relative-path \
     --bsize 1000 \
     --lowmem \
     --apply-rint \
-    --lowmem-prefix !{params.prefix}_tmp_rg \
+    --lowmem-prefix !{phenotype_id}_tmp_rg \
     --gz \
     --threads !{task.cpus} \
-    --out !{params.prefix} \
+    --out !{phenotype_id} \
 
     '''
 }

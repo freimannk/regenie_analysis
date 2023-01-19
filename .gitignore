@@ -1,0 +1,7 @@
+.nextflow*
+work/
+debug/
+singularity_img/
+*.html*
+regenie_trace.txt*
+slurm*

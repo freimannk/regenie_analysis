@@ -4,23 +4,21 @@
 process REGENIE_STEP_2 {
     container = 'quay.io/eqtlcatalogue/regenie:v3.2.1'
 
-    // Process directives
-    cpus 16
-    memory '4 GB'
-    time '4h'
-    
 
     publishDir "${params.outdir}/${params.prefix}/STEP2/regenie", mode:'copy',\
 		pattern: "*.regenie*"
-    publishDir "${params.outdir}/${params.prefix}/logs", mode:'copy',\
-		pattern:  "*.log"
+    //publishDir "${params.outdir}/${params.prefix}/logs", mode:'copy',\
+		//pattern:  "*.log"
      
     
-    // Input data    
+    // Input data     
     input:
-    tuple val(pgen_id), path(pgen_file)
-    file pred_list
-    tuple val(phenotype_id), path(loco_file)
+    //tuple val(pgen_id), path(pgen_file)
+    file bgen_file
+    file sample_file
+    val phenotype_id //0
+    file pred_list //1
+    path loco_file //2
     file phenotype_file
     file covariate_file   
     
@@ -33,7 +31,9 @@ process REGENIE_STEP_2 {
     '''
     regenie \
     --step 2 \
-    --pgen !{pgen_id} \
+    --bgen !{bgen_file} \
+    --sample !{sample_file} \
+    --ref-first \
     --phenoFile !{phenotype_file} \
     --phenoColList !{phenotype_id} \
     --covarFile !{covariate_file} \
@@ -43,7 +43,6 @@ process REGENIE_STEP_2 {
     --threads !{task.cpus} \
     --pred !{pred_list} \
     --gz \
-    --out pheno \
-
+    --out !{params.prefix} \
     '''
 }

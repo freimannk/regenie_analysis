@@ -1,4 +1,4 @@
-# Regenie-Nextflow-pipeline for eQTL analysis
+# Regenie-Nextflow-pipeline for QTL analysis
 
 **[Regenie](https://rgcgithub.github.io/regenie/) example workflow**
 -	Analysing multiple phenotypes at the same time

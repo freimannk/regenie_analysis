@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --time=79:00:00
+#SBATCH --time=96:00:00
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --mem=5G
@@ -14,4 +14,5 @@ module load nextflow
 module load any/singularity/3.5.3
 module load squashfs/4.4
 
-nextflow run main.nf -resume
+#nextflow run main.nf -resume
+nextflow run main.nf -entry step2_only -resume

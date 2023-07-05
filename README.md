@@ -15,3 +15,5 @@
 - params.covariate_list : comma separated list of covariates to include in the analysis
 - params.outdir : directory of the output
 - params.prefix : name of the root output file
+
+Use "-entry step2_only" to only run step 2 (with related datasets).

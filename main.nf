@@ -18,7 +18,7 @@ workflow step2_only {
    ONLY_REGENIE_STEP_2(bgen_step2_ch, sample_ch, phenotype_list_ch,\
                    phenotype_ch,  covariate_ch)
     
-}
+} 
 
 
 workflow {
@@ -40,7 +40,7 @@ workflow {
 
     
     REGENIE_STEP_2(bgen_step2_ch, sample_ch, REGENIE_STEP_1.out[0], REGENIE_STEP_1.out[1],\
-                   phenotype_ch,  covariate_ch)
+                   phenotype_ch,  covariate_ch, REGENIE_STEP_1.out[2])
     
 }
 

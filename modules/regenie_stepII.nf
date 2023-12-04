@@ -15,7 +15,8 @@ process REGENIE_STEP_2 {
     val phenotype_id 
     file pred_list 
     file phenotype_file
-    file covariate_file   
+    file covariate_file
+    file loco
     
     output:
     tuple val(phenotype_id), path("*.regenie*")

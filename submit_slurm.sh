@@ -14,5 +14,5 @@ module load nextflow
 module load any/singularity/3.5.3
 module load squashfs/4.4
 
-#nextflow run main.nf -resume
-nextflow run main.nf -entry step2_only -resume
+NXF_VER=22.04.3 nextflow run main.nf -resume
+#nextflow run main.nf -entry step2_only -resume

@@ -14,7 +14,7 @@ process REGENIE_STEP_1 {
     output:
     val phenotype_id
     path "*_pred.list"
-    file "*.loco.gz"
+    path "*.loco.gz"
     path ".command.out"
     path ".command.sh"
 
